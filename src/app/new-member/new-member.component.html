@@ -1,29 +1,49 @@
 <div class="new-member-container">
   <mat-card>
-    <form #new_member (onsubmit)="onSubmit(new_member)">
+    <form>
       <div class="full-name">
         <mat-form-field>
-          <input matInput placeholder="First Name" name="first_name" />
+          <input
+            matInput
+            placeholder="First Name"
+            name="first_name"
+            [(ngModel)]="first_name"
+          />
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Last Name" name="last_name" />
+          <input
+            matInput
+            placeholder="Last Name"
+            name="last_name"
+            [(ngModel)]="last_name"
+          />
         </mat-form-field>
       </div>
       <div class="address">
         <mat-form-field>
-          <input matInput placeholder="Address Line 1" name="address_line_1" />
+          <input
+            matInput
+            placeholder="Address Line 1"
+            name="address_line_1"
+            [(ngModel)]="address_line_1"
+          />
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Address Line 2" name="address_line_2" />
+          <input
+            matInput
+            placeholder="Address Line 2"
+            name="address_list_2"
+            [(ngModel)]="address_list_2"
+          />
         </mat-form-field>
       </div>
       <div class="state">
         <mat-form-field>
-          <input matInput placeholder="City" name="city" />
+          <input matInput placeholder="City" name="city" [(ngModel)]="city" />
         </mat-form-field>
         <mat-form-field>
           <mat-label>State</mat-label>
-          <mat-select [(value)]="selected" name="state">
+          <mat-select [(ngModel)]="state" name="state">
             <mat-option *ngFor="let state of States" value="{{ state }}">{{
               state
             }}</mat-option>
@@ -31,9 +51,31 @@
         </mat-form-field>
       </div>
       <mat-form-field>
-        <input type="tel" matInput placeholder="Phone" name="phone" />
+        <input
+          type="tel"
+          matInput
+          placeholder="Phone"
+          name="phone"
+          [(ngModel)]="phone"
+        />
       </mat-form-field>
-      <button type="submit">Create</button>
     </form>
   </mat-card>
+  <div class="button-container">
+    <div>
+      <button mat-raised-button (click)="onClear()" class="clear-button">
+        Clear
+      </button>
+    </div>
+    <div>
+      <button
+        mat-raised-button
+        (click)="onSubmit()"
+        type="submit"
+        class="submit-button"
+      >
+        Submit
+      </button>
+    </div>
+  </div>
 </div>

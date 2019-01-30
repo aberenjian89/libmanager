@@ -1,5 +1,7 @@
 .new-member-container
   display: flex
+  flex-direction: column
+  align-items: center
   justify-content: center
   margin-top: 30px
   mat-card
@@ -35,4 +37,15 @@
         justify-content: space-between
         mat-form-field
           width: 200px
+  .button-container
+    margin-top: 30px
+    display: flex
+    justify-content: flex-end
+    width: 50%
+    div:first-child
+      margin-right: 20px
+    .submit-button
+      background: #FF8A65 !important
+    .clear-button
+      background: gray
 

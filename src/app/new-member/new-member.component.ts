@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from "@angular/core";
+import { Component, ViewEncapsulation, NgModule } from "@angular/core";
 import { NgForm } from "@angular/forms";
 @Component({
   selector: "app-new-member",
@@ -59,10 +59,29 @@ export class NewMemberComponent {
     "Wisconsin",
     "Wyoming"
   ];
-  selected = this.States[0];
+
+  first_name = "";
+  last_name = "";
+  address_line_1 = "";
+  address_list_2 = "";
+  city = "";
+  phone = "";
+  state = this.States[0];
+  zipcode = "";
   constructor() {}
 
-  onSubmit(e, form: NgForm) {
+  onSubmit() {
     debugger;
+  }
+
+  onClear() {
+    this.first_name = "";
+    this.last_name = "";
+    this.address_line_1 = "";
+    this.address_list_2 = "";
+    this.city = "";
+    this.phone = "";
+    this.state = this.States[0];
+    this.zipcode = "";
   }
 }
