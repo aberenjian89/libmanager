@@ -12,14 +12,16 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatCardModule,
-  MatSelectModule
+  MatSelectModule,
+  MatDialogModule
 } from "@angular/material";
 
 import { AppComponent } from "./app.component";
 import { NewMemberComponent } from "./new-member/new-member.component";
+import { MembersComponent } from "./members/members.component";
 
 @NgModule({
-  declarations: [AppComponent, NewMemberComponent],
+  declarations: [AppComponent, NewMemberComponent, MembersComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -33,7 +35,8 @@ import { NewMemberComponent } from "./new-member/new-member.component";
     MatInputModule,
     MatCardModule,
     MatSelectModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

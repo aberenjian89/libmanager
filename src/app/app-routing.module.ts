@@ -1,15 +1,15 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { NewMemberComponent } from "./new-member/new-member.component";
+import { MembersComponent } from "./members/members.component";
 
 const routes: Routes = [
   {
-    path: "new-member",
-    component: NewMemberComponent
+    path: "members",
+    component: MembersComponent
   },
   {
     path: "",
-    redirectTo: "/new-member",
+    redirectTo: "/members",
     pathMatch: "full"
   }
 ];
