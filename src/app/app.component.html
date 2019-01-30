@@ -1,29 +1,18 @@
 <!--The content below is only a placeholder and can be replaced.-->
 
-
 <mat-toolbar class="main-toolbar">
-    <div>
-        <span>WoodCreek Public Library</span>
-    </div>
-    <div class="links">
-      <button mat-button>New Member</button>
-      <button mat-button>Checking</button>
-      <button mat-button>Inventory</button>
-      <button mat-button>Report</button>
-    </div>
-    <div class="account-setting">
-      <mat-menu #appMenu="matMenu">
-        <button mat-menu-item>
-          <mat-icon>settings</mat-icon>Settings </button>
-        <button mat-menu-item>
-        <mat-icon>
-          exit_to_app
-        </mat-icon>Logout</button>
-      </mat-menu>
-      <button mat-icon-button [matMenuTriggerFor]="appMenu">
-        Account
-      </button>
-    </div>
+  <div><span>Library Managment</span></div>
+  <div class="links">
+    <button mat-button>New Member</button> <button mat-button>Checking</button>
+    <button mat-button>Inventory</button> <button mat-button>Report</button>
+  </div>
+  <div class="account-setting">
+    <mat-menu #appMenu="matMenu">
+      <button mat-menu-item><mat-icon>settings</mat-icon>Settings</button>
+      <button mat-menu-item><mat-icon> exit_to_app </mat-icon>Logout</button>
+    </mat-menu>
+    <button mat-icon-button [matMenuTriggerFor]="appMenu">Account</button>
+  </div>
 </mat-toolbar>
 
 <router-outlet></router-outlet>

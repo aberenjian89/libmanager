@@ -1,0 +1,39 @@
+<div class="new-member-container">
+  <mat-card>
+    <form #new_member (onsubmit)="onSubmit(new_member)">
+      <div class="full-name">
+        <mat-form-field>
+          <input matInput placeholder="First Name" name="first_name" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Last Name" name="last_name" />
+        </mat-form-field>
+      </div>
+      <div class="address">
+        <mat-form-field>
+          <input matInput placeholder="Address Line 1" name="address_line_1" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Address Line 2" name="address_line_2" />
+        </mat-form-field>
+      </div>
+      <div class="state">
+        <mat-form-field>
+          <input matInput placeholder="City" name="city" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>State</mat-label>
+          <mat-select [(value)]="selected" name="state">
+            <mat-option *ngFor="let state of States" value="{{ state }}">{{
+              state
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <mat-form-field>
+        <input type="tel" matInput placeholder="Phone" name="phone" />
+      </mat-form-field>
+      <button type="submit">Create</button>
+    </form>
+  </mat-card>
+</div>
