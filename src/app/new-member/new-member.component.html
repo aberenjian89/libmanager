@@ -1,70 +1,73 @@
 <div class="new-member-container">
+  <div class="header"><span>Add New Member</span></div>
   <mat-card>
-    <form>
-      <div class="full-name">
+    <mat-card-content>
+      <form>
+        <div class="full-name">
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="First Name"
+              name="first_name"
+              [(ngModel)]="first_name"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Last Name"
+              name="last_name"
+              [(ngModel)]="last_name"
+            />
+          </mat-form-field>
+        </div>
+        <div class="address">
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Address Line 1"
+              name="address_line_1"
+              [(ngModel)]="address_line_1"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Address Line 2"
+              name="address_list_2"
+              [(ngModel)]="address_list_2"
+            />
+          </mat-form-field>
+        </div>
+        <div class="state">
+          <mat-form-field>
+            <input matInput placeholder="City" name="city" [(ngModel)]="city" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>State</mat-label>
+            <mat-select [(ngModel)]="state" name="state">
+              <mat-option *ngFor="let state of States" value="{{ state }}">{{
+                state
+              }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
         <mat-form-field>
           <input
+            type="tel"
             matInput
-            placeholder="First Name"
-            name="first_name"
-            [(ngModel)]="first_name"
+            placeholder="Phone"
+            name="phone"
+            [(ngModel)]="phone"
           />
         </mat-form-field>
-        <mat-form-field>
-          <input
-            matInput
-            placeholder="Last Name"
-            name="last_name"
-            [(ngModel)]="last_name"
-          />
-        </mat-form-field>
-      </div>
-      <div class="address">
-        <mat-form-field>
-          <input
-            matInput
-            placeholder="Address Line 1"
-            name="address_line_1"
-            [(ngModel)]="address_line_1"
-          />
-        </mat-form-field>
-        <mat-form-field>
-          <input
-            matInput
-            placeholder="Address Line 2"
-            name="address_list_2"
-            [(ngModel)]="address_list_2"
-          />
-        </mat-form-field>
-      </div>
-      <div class="state">
-        <mat-form-field>
-          <input matInput placeholder="City" name="city" [(ngModel)]="city" />
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>State</mat-label>
-          <mat-select [(ngModel)]="state" name="state">
-            <mat-option *ngFor="let state of States" value="{{ state }}">{{
-              state
-            }}</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <mat-form-field>
-        <input
-          type="tel"
-          matInput
-          placeholder="Phone"
-          name="phone"
-          [(ngModel)]="phone"
-        />
-      </mat-form-field>
-    </form>
+      </form>
+    </mat-card-content>
   </mat-card>
   <div class="button-container">
     <div>
-      <button mat-raised-button (click)="onClear()" class="clear-button">
-        Clear
+      <button mat-raised-button (click)="onClose()" class="clear-button">
+        Cancel
       </button>
     </div>
     <div>

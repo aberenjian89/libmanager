@@ -12,6 +12,5 @@ export class MembersComponent {
 
   OpenDialog() {
     const dialogRef = this.dialog.open(NewMemberComponent);
-    console.log(this.dialog);
   }
 }

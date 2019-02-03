@@ -38,6 +38,7 @@ import { MembersComponent } from "./members/members.component";
     FormsModule,
     MatDialogModule
   ],
+  entryComponents: [NewMemberComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -3,7 +3,16 @@
   flex-direction: column
   align-items: center
   justify-content: center
-  margin-top: 30px
+  .header
+    color: gray !important
+    width: 100%
+    display: flex
+    justify-content: flex-start
+    padding: 15px
+    font-family: 'Roboto Condensed', sans-serif
+    font-size: 20px
+    font-weight: 500
+
   mat-card
     min-width: 600px
     background: #ffffff
@@ -41,11 +50,18 @@
     margin-top: 30px
     display: flex
     justify-content: flex-end
-    width: 50%
+    width: 100%
     div:first-child
       margin-right: 20px
     .submit-button
       background: #FF8A65 !important
     .clear-button
       background: gray
+.mat-dialog-container
+  background: white
+  padding: 12px
+.mat-select-panel
+  background: white !important
+.mat-option
+  color: black !important
 

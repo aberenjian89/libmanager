@@ -1,5 +1,7 @@
-import { Component, ViewEncapsulation, NgModule } from "@angular/core";
+import { Component, ViewEncapsulation, Inject } from "@angular/core";
 import { NgForm } from "@angular/forms";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
+
 @Component({
   selector: "app-new-member",
   templateUrl: "./new-member.component.html",
@@ -68,20 +70,13 @@ export class NewMemberComponent {
   phone = "";
   state = this.States[0];
   zipcode = "";
-  constructor() {}
+  constructor(public dialogRef: MatDialogRef<NewMemberComponent>) {}
 
   onSubmit() {
     debugger;
   }
 
-  onClear() {
-    this.first_name = "";
-    this.last_name = "";
-    this.address_line_1 = "";
-    this.address_list_2 = "";
-    this.city = "";
-    this.phone = "";
-    this.state = this.States[0];
-    this.zipcode = "";
+  onClose() {
+    this.dialogRef.close();
   }
 }
