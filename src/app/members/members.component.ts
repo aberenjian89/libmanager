@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { MatDialog } from "@angular/material";
 import { NewMemberComponent } from "../new-member/new-member.component";
+import { MembersTableComponent } from "../members-table/members-table.component";
 
 @Component({
   selector: "app-members",
