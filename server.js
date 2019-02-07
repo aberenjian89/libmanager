@@ -1,11 +1,20 @@
-const express = require("express");
-const path = require("path");
-const http = require("http");
-const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
-const morgan = require("morgan");
-const cookie_parser = require("cookie-parser");
-const session = require("express-session");
+// const express = require("express");
+// const path = require("path");
+// const http = require("http");
+// const bodyParser = require("body-parser");
+// const mongoose = require("mongoose");
+// const morgan = require("morgan");
+// const cookie_parser = require("cookie-parser");
+// const session = require("express-session");
+
+import express from 'express'
+import path from 'path'
+import http from 'http'
+import bodyParser from 'body-parser'
+import mongoose from 'mongoose'
+import morgan from 'morgan'
+import cookie_parser from 'cookie-parser'
+import session from 'express-session'
 
 require("dotenv").load();
 app = express();
