@@ -1,0 +1,40 @@
+<div class="login-container">
+  <mat-card>
+    <mat-card-title>Library Managment System</mat-card-title>
+    <mat-card-content>
+      <form>
+        <div class="login-input-container">
+          <mat-form-field>
+            <input
+              matInput
+              type="email"
+              placeholder="Email"
+              name="email"
+              [(ngModel)]="email"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              type="password"
+              placeholder="Password"
+              name="password"
+              [(ngModel)]="password"
+            />
+          </mat-form-field>
+        </div>
+      </form>
+    </mat-card-content>
+    <div class="login-action">
+      <div></div>
+      <button
+        mat-raised-button
+        (click)="onSubmit()"
+        type="submit"
+        class="login-button"
+      >
+        Login
+      </button>
+    </div>
+  </mat-card>
+</div>
