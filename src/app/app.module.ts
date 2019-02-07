@@ -13,17 +13,26 @@ import {
   MatInputModule,
   MatCardModule,
   MatSelectModule,
-  MatDialogModule, MatTableModule, MatPaginatorModule, MatSortModule
+  MatDialogModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatSortModule
 } from "@angular/material";
 
 import { AppComponent } from "./app.component";
 import { NewMemberComponent } from "./new-member/new-member.component";
 import { MembersComponent } from "./members/members.component";
-import { MembersTableComponent } from './members-table/members-table.component';
-import { AuthComponent } from './auth/auth.component';
+import { MembersTableComponent } from "./members-table/members-table.component";
+import { AuthComponent } from "./auth/auth.component";
 
 @NgModule({
-  declarations: [AppComponent, NewMemberComponent, MembersComponent, MembersTableComponent, AuthComponent],
+  declarations: [
+    AppComponent,
+    NewMemberComponent,
+    MembersComponent,
+    MembersTableComponent,
+    AuthComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
