@@ -1,14 +1,13 @@
-import express from 'express'
-import path from 'path'
-import http from 'http'
-import bodyParser from 'body-parser'
-import mongoose from 'mongoose'
-import morgan from 'morgan'
-import cookie_parser from 'cookie-parser'
-import session from 'express-session'
+import express from "express";
+import path from "path";
+import http from "http";
+import bodyParser from "body-parser";
+import mongoose from "mongoose";
+import morgan from "morgan";
+import cookie_parser from "cookie-parser";
+import session from "express-session";
 
-
-import Adminroutes from './server/routes/admin_routes'
+import Adminroutes from "./server/routes/admin_routes";
 
 require("dotenv").load();
 
@@ -49,9 +48,8 @@ app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "./dist/libmanager")));
 app.use(express.static(path.join(__dirname, "./dist/libmanager/assets")));
 
-
 // Routes
-app.use('/api',Adminroutes)
+app.use("/api", Adminroutes);
 
 app.get("*", function(req, res) {
   res.sendFile(path.join(__dirname, "./dist/libmanager/index.html"));

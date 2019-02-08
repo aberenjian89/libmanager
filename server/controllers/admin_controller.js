@@ -1,8 +1,47 @@
-import * as AdminModel from '../models/admin_model'
-
+import Admin from "../models/admin_model";
 
 export default class AdminController {
-  create(req,res,next){
-    return next()
+  constructor() {}
+  static create(req, res, next) {
+    let new_admin = new Admin({
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+      email: req.body.email,
+      password: req.body.password
+    });
+    new_admin.save((err, result) => {
+      if (err) {
+        res.status(500).json({
+          message: err.message
+        });
+      }
+      res.status(200).json({
+        admin: result
+      });
+    });
+  }
+
+  static update(req, res, next) {
+    let admin = new Admin({
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+      email: req.body.email,
+      password: req.body.password
+    });
+    Admin.findOneAndUpdate({ _id: req.query.id }, admin, (err, result) => {
+      if (err) {
+        return res.status(500).json({
+          message: err.message
+        });
+      }
+      return res.status(200).json({
+        admin: result
+      });
+    });
+    next();
+  }
+
+  static delete(req, res, next) {
+    next();
   }
 }
