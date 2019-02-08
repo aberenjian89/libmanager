@@ -1,12 +1,3 @@
-// const express = require("express");
-// const path = require("path");
-// const http = require("http");
-// const bodyParser = require("body-parser");
-// const mongoose = require("mongoose");
-// const morgan = require("morgan");
-// const cookie_parser = require("cookie-parser");
-// const session = require("express-session");
-
 import express from 'express'
 import path from 'path'
 import http from 'http'
@@ -16,8 +7,12 @@ import morgan from 'morgan'
 import cookie_parser from 'cookie-parser'
 import session from 'express-session'
 
+
+import Adminroutes from './server/routes/admin_routes'
+
 require("dotenv").load();
-app = express();
+
+let app = express();
 
 if (
   process.env.ENVIRONMENT === "development" ||
@@ -53,6 +48,10 @@ app.use(morgan("dev"));
 
 app.use(express.static(path.join(__dirname, "./dist/libmanager")));
 app.use(express.static(path.join(__dirname, "./dist/libmanager/assets")));
+
+
+// Routes
+app.use('/api',Adminroutes)
 
 app.get("*", function(req, res) {
   res.sendFile(path.join(__dirname, "./dist/libmanager/index.html"));
