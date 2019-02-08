@@ -8,6 +8,7 @@ import cookie_parser from "cookie-parser";
 import session from "express-session";
 
 import Adminroutes from "./server/routes/admin_routes";
+import Sessionroutes from './server/routes/session_routes'
 
 require("dotenv").load();
 
@@ -50,6 +51,7 @@ app.use(express.static(path.join(__dirname, "./dist/libmanager/assets")));
 
 // Routes
 app.use("/api", Adminroutes);
+app.use("/api",Sessionroutes)
 
 app.get("*", function(req, res) {
   res.sendFile(path.join(__dirname, "./dist/libmanager/index.html"));

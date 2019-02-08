@@ -1,6 +1,5 @@
 import * as express from "express";
 import AdminController from "../controllers/admin_controller";
-import Admin from "../models/admin_model";
 
 let Adminroutes = express.Router();
 
