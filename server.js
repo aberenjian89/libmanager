@@ -51,7 +51,7 @@ app.use(express.static(path.join(__dirname, "./dist/libmanager/assets")));
 
 // Routes
 app.use("/api", Adminroutes);
-app.use("/api",Sessionroutes)
+app.use("/api", Sessionroutes)
 
 app.get("*", function(req, res) {
   res.sendFile(path.join(__dirname, "./dist/libmanager/index.html"));

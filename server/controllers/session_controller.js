@@ -30,7 +30,7 @@ export default class SessionController {
                 req.session.user = current_user
                 return res.status(201).json({
                   messge: "Authenticated",
-                  token: token,
+                  auth_token: token,
                   current_user: {
                     first_name: current_user.first_name,
                     last_name: current_user.last_name,
@@ -49,7 +49,24 @@ export default class SessionController {
       })
     }
 
-    destroy(req,res){
-
+    static destroy(req,res,next){
+      Admin.findOne({_id: req.query.id},(err,result)=>{
+        if (err){
+          res.status(500).json({
+            message: err
+          })
+        }
+        result.auth_token = null
+        result.save((err,result)=>{
+          if (err){
+            res.status(500).json({
+              message: err
+            })
+          }
+          res.status(200).json({
+            message: "Successfully Logout"
+          })
+        })
+      })
     }
 }

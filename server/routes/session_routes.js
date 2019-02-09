@@ -9,4 +9,10 @@ Sessionroutes.post("/new_session",(req,res,next)=>{
 })
 
 
+Sessionroutes.delete("/logout",(req,res,next)=>{
+  console.log("Hello")
+  SessionController.destroy(req,res,next)
+})
+
+
 export default Sessionroutes

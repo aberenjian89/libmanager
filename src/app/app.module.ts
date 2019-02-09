@@ -23,7 +23,7 @@ import { AppComponent } from "./app.component";
 import { NewMemberComponent } from "./new-member/new-member.component";
 import { MembersComponent } from "./members/members.component";
 import { MembersTableComponent } from "./members-table/members-table.component";
-import { AuthComponent } from "./auth/auth.component";
+import { LoginComponent } from "./login/login.component";
 
 @NgModule({
   declarations: [
@@ -31,7 +31,7 @@ import { AuthComponent } from "./auth/auth.component";
     NewMemberComponent,
     MembersComponent,
     MembersTableComponent,
-    AuthComponent
+    LoginComponent
   ],
   imports: [
     BrowserModule,
