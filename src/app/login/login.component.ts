@@ -27,7 +27,13 @@ export class LoginComponent implements OnInit {
           token: res.auth_token,
           expiresIn: res.expiresIn
         });
-        this.authService.islogined =true
+        this.authService.islogined = true;
+        this.authService.current_user = {
+          _id: res.current_user._id,
+          first_name: res.current_user.first_name,
+          last_name: res.current_user.last_name,
+          email: res.current_user.email
+        };
         this.router.navigate(["/members"]);
       });
   }

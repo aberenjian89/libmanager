@@ -9,7 +9,9 @@
   <div class="account-setting">
     <mat-menu #appMenu="matMenu">
       <button mat-menu-item><mat-icon>settings</mat-icon>Settings</button>
-      <button mat-menu-item><mat-icon> exit_to_app </mat-icon>Logout</button>
+      <button mat-menu-item (click)="OnLogout()">
+        <mat-icon> exit_to_app </mat-icon>Logout
+      </button>
     </mat-menu>
     <button mat-icon-button [matMenuTriggerFor]="appMenu">Account</button>
   </div>

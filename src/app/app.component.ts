@@ -1,6 +1,7 @@
 import { Component, ViewChild, OnInit } from "@angular/core";
 import { MatMenuTrigger } from "@angular/material";
 import { AuthService } from "./services/auth.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-root",
@@ -8,7 +9,7 @@ import { AuthService } from "./services/auth.service";
   styleUrls: ["./app.component.sass"]
 })
 export class AppComponent implements OnInit {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
   title = "libmanager";
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
 
@@ -18,7 +19,33 @@ export class AppComponent implements OnInit {
     // this.trigger.openMenu();
   }
 
+  OnLogout() {
+    this.authService.LogoutAdmin().subscribe(
+      res => {
+        this.router.navigate(["/login"]);
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
   ngOnInit() {
-    this.authenticate = this.authService.AutoAuthenticateAdmin();
+    const token = this.authService.GetAuthToken();
+    if (token) {
+      this.authService.AutoAuthenticateAdmin().subscribe(
+        res => {
+          this.authenticate = true;
+        },
+        err => {
+          this.authenticate = false;
+          this.authService.RemoveAuthToken();
+          this.router.navigate(["/login"]);
+        }
+      );
+    } else {
+      this.authenticate = false;
+      this.router.navigate(["/login"]);
+    }
   }
 }
