@@ -18,13 +18,19 @@ interface current_user {
 export class AuthService {
   constructor(private http: HttpClient) {}
 
+  islogined = false
   loginroute = "api/new_session";
   logoutroute = "api/logout";
+  memberroute = "api/members"
 
   AuthenticateAdmin(user): Observable<current_user> {
     let email = user.email;
     let password = user.password;
     return this.http.post<current_user>(this.loginroute, { email, password });
+  }
+
+  isLogin(): boolean{
+    return this.islogined
   }
 
   LogoutAdmin() {}
@@ -44,7 +50,7 @@ export class AuthService {
   }
 
   RemoveAuthToken() {
-    sessionStorage.removeItem("auth_token");
+    sessionStorage.removeItem("libmanager");
   }
 
   GetAuthToken() {

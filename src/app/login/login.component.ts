@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
           token: res.auth_token,
           expiresIn: res.expiresIn
         });
+        this.authService.islogined =true
         this.router.navigate(["/members"]);
       });
   }
