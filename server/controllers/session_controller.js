@@ -29,7 +29,6 @@ export default class SessionController {
                 message: err
               });
             } else {
-              req.session.user = current_user;
               return res.status(201).json({
                 messge: "Authenticated",
                 auth_token: token,
@@ -76,9 +75,24 @@ export default class SessionController {
   static verifytoken(req, res, next) {
     try {
       jwt.verify(req.query.token, process.env.Super_Secret);
-      return res.status(200).json({
-        message: "Authroized"
-      });
+      Admin.findOne({auth_token: req.query.token},(err,result)=>{
+        if (err){
+          return res.status(500)
+        }
+        if (result){
+          return res.status(201).json({
+            message: "Authenticated",
+            current_user: {
+              _id: result._id,
+              first_name: result.first_name,
+              last_name: result.last_name,
+              email: result.email
+            }
+          })
+        }else{
+          return res.status(500)
+        }
+      })
     } catch (ex) {
       return res.status(401).json({
         message: "Not Authroized"

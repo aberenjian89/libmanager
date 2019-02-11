@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Subject ,Observable, Observer } from "rxjs";
 import {Router} from '@angular/router'
+import { timingSafeEqual } from 'crypto';
 
 interface current_user {
   message: String;
@@ -55,9 +56,11 @@ export class AuthService {
         this.Authenticated = true
         this.authStatusListener.next(true)
         this.SetAuthToken()
+        this.current_user = response.current_user
       },err=>{
         this.authStatusListener.next(false)
         this.Authenticated = false
+        this.current_user = null
       })
   }
 
@@ -65,22 +68,32 @@ export class AuthService {
     return this.Authenticated;
   }
 
-  // LogoutAdmin(){
-  //  this.http.delete<{message: String}>()
-  // }
+  onLogout(){
+   this.http.delete<{message: String}>(this.logoutroute+`?id=${this.current_user._id}`)
+    .subscribe((Response)=>{
+      this.RemoveAuthToken()
+      this.Authenticated = false;
+      this.current_user = null
+      this.token = null
+      this.duration = null
+      this.authStatusListener.next(false)
+    })
+  }
 
   AutoAuthenticateAdmin(){
     if (this.GetAuthToken()){
       const token = this.GetAuthToken().auth_token
-      this.http.get<{message: String}>(this.verifytokenroute+`?token=${token}`)
+      this.http.get<{current_user}>(this.verifytokenroute+`?token=${token}`)
       .subscribe((response)=>{
         this.token = token
         this.duration = this.GetAuthToken().expiresIn
         this.authStatusListener.next(true)
         this.Authenticated = true
+        this.current_user = response.current_user
       },(err)=>{
         this.authStatusListener.next(false)
         this.Authenticated = false
+        this.current_user = null
         this.router.navigate(['/login'])
       })
     }else{

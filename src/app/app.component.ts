@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit } from "@angular/core";
+import { Component, ViewChild, OnInit, OnDestroy } from "@angular/core";
 import { MatMenuTrigger } from "@angular/material";
 import { AuthService } from "./services/auth.service";
 import { Router } from "@angular/router";
@@ -8,9 +8,10 @@ import { Router } from "@angular/router";
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.sass"]
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   constructor(private authService: AuthService, private router: Router) {}
   title = "libmanager";
+  private auth_observable;
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
 
   authenticate = false;
@@ -20,20 +21,18 @@ export class AppComponent implements OnInit {
   }
 
   OnLogout() {
-    this.authService.LogoutAdmin().subscribe(
-      res => {
-        this.router.navigate(["/login"]);
-      },
-      err => {
-        console.log(err);
-      }
-    );
+   this.authService.onLogout()
+   this.auth_observable.subscribe(Auth=>{
+     if (!Auth){
+       this.router.navigate(['/login'])
+     }
+   })
   }
 
   ngOnInit() {
    this.authService.AutoAuthenticateAdmin()
-   this.authService.getAuthStatusListener()
-   .subscribe(Auth=>{
+   this.auth_observable =this.authService.getAuthStatusListener()
+   this.auth_observable.subscribe(Auth=>{
      if (Auth){
        this.authenticate = true
      }else{
@@ -41,4 +40,11 @@ export class AppComponent implements OnInit {
      }
    })
   }
+
+  ngOnDestroy(){
+    this.auth_observable.unsubscribe();
+  }
+
+
+
 }
