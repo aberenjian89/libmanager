@@ -15,7 +15,14 @@ export class LoginComponent implements OnInit {
   password = "";
   error_message = ""
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.authService.getAuthStatusListener()
+    .subscribe((Authenticate)=>{
+      if (Authenticate){
+        this.router.navigate(['/members'])
+      }
+    })
+  }
 
   onSubmit() {
     this.authService.onLogin({email: this.email,password: this.password})

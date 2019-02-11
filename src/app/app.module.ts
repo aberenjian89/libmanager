@@ -25,6 +25,7 @@ import { NewMemberComponent } from "./new-member/new-member.component";
 import { MembersComponent } from "./members/members.component";
 import { MembersTableComponent } from "./members-table/members-table.component";
 import { LoginComponent } from "./login/login.component";
+import { AuthGuardService } from './services/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,7 @@ import { LoginComponent } from "./login/login.component";
     MatSortModule
   ],
   entryComponents: [NewMemberComponent],
-  providers: [],
+  providers: [AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

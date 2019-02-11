@@ -2,7 +2,6 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Subject ,Observable, Observer } from "rxjs";
 import {Router} from '@angular/router'
-import { timingSafeEqual } from 'crypto';
 
 interface current_user {
   message: String;
@@ -85,6 +84,7 @@ export class AuthService {
       const token = this.GetAuthToken().auth_token
       this.http.get<{current_user}>(this.verifytokenroute+`?token=${token}`)
       .subscribe((response)=>{
+
         this.token = token
         this.duration = this.GetAuthToken().expiresIn
         this.authStatusListener.next(true)
