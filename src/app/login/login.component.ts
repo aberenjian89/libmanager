@@ -13,29 +13,26 @@ export class LoginComponent implements OnInit {
 
   email = "";
   password = "";
-  error_message = ""
+  error_message = "";
 
   ngOnInit() {
-    this.authService.getAuthStatusListener()
-    .subscribe((Authenticate)=>{
-      if (Authenticate){
-        this.router.navigate(['/members'])
+    this.authService.getAuthStatusListener().subscribe(Authenticate => {
+      debugger;
+      if (Authenticate) {
+        this.router.navigate(["/members"]);
       }
-    })
+    });
   }
 
   onSubmit() {
-    this.authService.onLogin({email: this.email,password: this.password})
-    this.authService.getAuthStatusListener()
-    .subscribe((Authenticated)=>{
-      if (Authenticated){
-        this.router.navigate(['/members'])
-        this.error_message = ""
+    this.authService.onLogin({ email: this.email, password: this.password });
+    this.authService.getAuthStatusListener().subscribe(Authenticated => {
+      if (Authenticated) {
+        this.router.navigate(["/members"]);
+        this.error_message = "";
+      } else {
+        this.error_message = "Wrong Password or Email";
       }
-      else{
-        this.error_message = "Wrong Password or Email"
-      }
-    })
-
+    });
   }
 }
