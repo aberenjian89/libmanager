@@ -25,7 +25,8 @@ import { NewMemberComponent } from "./new-member/new-member.component";
 import { MembersComponent } from "./members/members.component";
 import { MembersTableComponent } from "./members-table/members-table.component";
 import { LoginComponent } from "./login/login.component";
-import { AuthGuardService } from './services/auth-guard.service';
+import { AuthGuardService } from "./services/auth-guard.service";
+import { AuthDeactiveService } from "./services/auth-decative.service";
 
 @NgModule({
   declarations: [
@@ -56,7 +57,7 @@ import { AuthGuardService } from './services/auth-guard.service';
     MatSortModule
   ],
   entryComponents: [NewMemberComponent],
-  providers: [AuthGuardService],
+  providers: [AuthGuardService, AuthDeactiveService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

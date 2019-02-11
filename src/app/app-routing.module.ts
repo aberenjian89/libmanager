@@ -2,13 +2,14 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule, CanActivate } from "@angular/router";
 import { MembersComponent } from "./members/members.component";
 import { LoginComponent } from "./login/login.component";
-import {AuthGuardService} from './services/auth-guard.service'
-
+import { AuthGuardService } from "./services/auth-guard.service";
+import { AuthDeactiveService } from "./services/auth-decative.service";
 
 const routes: Routes = [
   {
     path: "login",
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [AuthDeactiveService]
   },
   {
     path: "members",
@@ -20,7 +21,6 @@ const routes: Routes = [
     redirectTo: "/members",
     pathMatch: "full",
     canActivate: [AuthGuardService]
-
   }
 ];
 
