@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Subject ,Observable, Observer } from "rxjs";
+import {Router} from '@angular/router'
 
 interface current_user {
   message: String;
@@ -18,41 +19,81 @@ interface current_user {
   providedIn: "root"
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
-  islogined = false;
-  loginroute = "api/new_session";
-  logoutroute = "api/logout";
-  verifytokenroute = "api/validate_token";
-  current_user = null;
+  private loginroute = "api/new_session";
+  private logoutroute = "api/logout";
+  private verifytokenroute = "api/validate_token";
+  private current_user = null;
+  private Authenticated = false
+  private token: String
+  private authStatusListener = new Subject<boolean>()
+  private duration: any
 
-  AuthenticateAdmin(user): Observable<current_user> {
-    let email = user.email;
-    let password = user.password;
-    return this.http.post<current_user>(this.loginroute, { email, password });
+
+  getToken(): String{
+    return this.token
   }
 
-  isLogin(): boolean {
-    return this.islogined;
+  gettCurrentUser(){
+    return this.current_user
   }
 
-  LogoutAdmin(): Observable<{ message: String }> {
-    return this.http.delete<{ message: String }>(this.logoutroute);
+  getAuthStatusListener(): Observable<boolean>{
+    return this.authStatusListener.asObservable();
   }
 
-  AutoAuthenticateAdmin(): Observable<{ message: String }> {
-    let auth_token = this.GetAuthToken().auth_token;
-    return this.http.get<{ message: String }>(
-      this.verifytokenroute + `?token=${auth_token}`
-    );
+  onLogin(user){
+      let authdata = {
+        email: user.email,
+        password: user.password
+      }
+      this.http.post<current_user>(this.loginroute,authdata)
+      .subscribe((response)=>{
+        this.token = response.auth_token
+        this.duration = response.expiresIn
+        this.Authenticated = true
+        this.authStatusListener.next(true)
+        this.SetAuthToken()
+      },err=>{
+        this.authStatusListener.next(false)
+        this.Authenticated = false
+      })
   }
 
-  SetAuthToken(data) {
+  isAuthenticated(): boolean {
+    return this.Authenticated;
+  }
+
+  // LogoutAdmin(){
+  //  this.http.delete<{message: String}>()
+  // }
+
+  AutoAuthenticateAdmin(){
+    if (this.GetAuthToken()){
+      const token = this.GetAuthToken().auth_token
+      this.http.get<{message: String}>(this.verifytokenroute+`?token=${token}`)
+      .subscribe((response)=>{
+        this.token = token
+        this.duration = this.GetAuthToken().expiresIn
+        this.authStatusListener.next(true)
+        this.Authenticated = true
+      },(err)=>{
+        this.authStatusListener.next(false)
+        this.Authenticated = false
+        this.router.navigate(['/login'])
+      })
+    }else{
+      this.router.navigate(['/login'])
+    }
+  }
+
+  SetAuthToken() {
     sessionStorage.setItem(
       "libmanager",
       JSON.stringify({
-        auth_token: data.token,
-        expiresIn: data.expiresIn
+        auth_token: this.token,
+        expiresIn: this.duration
       })
     );
   }

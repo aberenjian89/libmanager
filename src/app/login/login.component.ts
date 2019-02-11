@@ -13,28 +13,22 @@ export class LoginComponent implements OnInit {
 
   email = "";
   password = "";
+  error_message = ""
 
   ngOnInit() {}
 
   onSubmit() {
-    this.authService
-      .AuthenticateAdmin({
-        email: this.email,
-        password: this.password
-      })
-      .subscribe(res => {
-        this.authService.SetAuthToken({
-          token: res.auth_token,
-          expiresIn: res.expiresIn
-        });
-        this.authService.islogined = true;
-        this.authService.current_user = {
-          _id: res.current_user._id,
-          first_name: res.current_user.first_name,
-          last_name: res.current_user.last_name,
-          email: res.current_user.email
-        };
-        this.router.navigate(["/members"]);
-      });
+    this.authService.onLogin({email: this.email,password: this.password})
+    this.authService.getAuthStatusListener()
+    .subscribe((Authenticated)=>{
+      if (Authenticated){
+        this.router.navigate(['/members'])
+        this.error_message = ""
+      }
+      else{
+        this.error_message = "Wrong Password or Email"
+      }
+    })
+
   }
 }

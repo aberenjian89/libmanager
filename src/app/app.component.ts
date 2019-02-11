@@ -31,21 +31,14 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    const token = this.authService.GetAuthToken();
-    if (token) {
-      this.authService.AutoAuthenticateAdmin().subscribe(
-        res => {
-          this.authenticate = true;
-        },
-        err => {
-          this.authenticate = false;
-          this.authService.RemoveAuthToken();
-          this.router.navigate(["/login"]);
-        }
-      );
-    } else {
-      this.authenticate = false;
-      this.router.navigate(["/login"]);
-    }
+   this.authService.AutoAuthenticateAdmin()
+   this.authService.getAuthStatusListener()
+   .subscribe(Auth=>{
+     if (Auth){
+       this.authenticate = true
+     }else{
+       this.authenticate = false
+     }
+   })
   }
 }

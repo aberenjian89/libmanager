@@ -15,7 +15,6 @@ export default class SessionController {
         });
       }
       bcrypt.compare(req.body.password, user.password, (err, result) => {
-        console.log(result);
         if (!err) {
           const token = jwt.sign(
             { email: user.email, userId: current_user._id },
