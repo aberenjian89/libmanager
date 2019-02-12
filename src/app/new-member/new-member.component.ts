@@ -73,7 +73,7 @@ export class NewMemberComponent {
   constructor(public dialogRef: MatDialogRef<NewMemberComponent>) {}
 
   onSubmit() {
-    debugger;
+
   }
 
   onClose() {

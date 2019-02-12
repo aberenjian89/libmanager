@@ -17,7 +17,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.authService.getAuthStatusListener().subscribe(Authenticate => {
-      debugger;
       if (Authenticate) {
         this.router.navigate(["/members"]);
       }

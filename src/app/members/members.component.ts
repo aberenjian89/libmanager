@@ -18,7 +18,6 @@ export class MembersComponent implements OnInit {
   ngOnInit(){
     this.auth_service.getAuthStatusListener()
     .subscribe((Auth)=>{
-      debugger
       if (!Auth){
         this.router.navigate(['../login'])
       }

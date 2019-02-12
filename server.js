@@ -9,6 +9,7 @@ import session from "express-session";
 
 import Adminroutes from "./server/routes/admin_routes";
 import Sessionroutes from './server/routes/session_routes'
+import Memeberroutes from './server/routes/member_routes'
 
 require("dotenv").load();
 
@@ -51,7 +52,8 @@ app.use(express.static(path.join(__dirname, "./dist/libmanager/assets")));
 
 // Routes
 app.use("/api", Adminroutes);
-app.use("/api", Sessionroutes)
+app.use("/api", Sessionroutes);
+app.use("/api", Memeberroutes)
 
 app.get("*", function(req, res) {
   res.sendFile(path.join(__dirname, "./dist/libmanager/index.html"));

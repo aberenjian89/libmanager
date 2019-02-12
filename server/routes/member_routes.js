@@ -1,15 +1,18 @@
 import express from 'express'
-import {MemberController} from  '../controllers/member_controller'
+import MemberController from  '../controllers/member_controller'
 import authenticate from '../middlewares/auth_middleware'
 
-let router = express.Router()
+let Memberroutes = express.Router()
 
 
 
-router.post('/new_member',authenticate,(req,res,next)=>{
+Memberroutes.post('/new_member',authenticate,(req,res,next)=>{
   MemberController.create(req,res,next)
 })
 
-router.get('/members',authenticate,(req,res,next)=>{
+Memberroutes.get('/members',authenticate,(req,res,next)=>{
 
 })
+
+
+export default Memberroutes

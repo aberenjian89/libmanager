@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
-import { nextTick } from "q";
 
 let adminSchema = new mongoose.Schema({
   first_name: String,

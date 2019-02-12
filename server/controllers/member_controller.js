@@ -2,16 +2,14 @@ import Memebr from '../models/member_model'
 
 
 export default class MemberController {
-  create(req,res,next){
+  static create(req,res,next){
     let memeber = new Memebr({
       first_name: req.params.first_name,
       last_name: req.params.last_name,
-      address: {
-        line1: req.params.line1,
-        line2: req.params.line2,
-        city: req.params.city,
-        country: req.params.country
-      },
+      address: req.params.address,
+      city: req.params.city,
+      zipcode: req.params.zipcode,
+      state: req.params.state,
       phone: req.params.phone
     })
     memeber.save((err,result)=>{

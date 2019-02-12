@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit, OnDestroy } from "@angular/core";
+import { Component, ViewChild, OnInit, OnDestroy, ViewEncapsulation } from "@angular/core";
 import { MatMenuTrigger } from "@angular/material";
 import { AuthService } from "./services/auth.service";
 import { Router } from "@angular/router";
@@ -6,7 +6,9 @@ import { Router } from "@angular/router";
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.sass"]
+  styleUrls: ["./app.component.sass"],
+  encapsulation: ViewEncapsulation.None
+
 })
 export class AppComponent implements OnInit, OnDestroy {
   constructor(private authService: AuthService, private router: Router) {}
@@ -16,7 +18,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   authenticate = false;
   OpenMenu(e) {
-    debugger;
     // this.trigger.openMenu();
   }
 
