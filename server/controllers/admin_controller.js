@@ -1,4 +1,5 @@
 import Admin from "../models/admin_model";
+import bcrypt from "bcrypt";
 
 export default class AdminController {
   constructor() {}
@@ -8,6 +9,12 @@ export default class AdminController {
       last_name: req.body.last_name,
       email: req.body.email,
       password: req.body.password
+    });
+    bcrypt.hash(new_admin.password, 10, (err, hash) => {
+      if (err) {
+        return next(err);
+      }
+      new_admin.password = hash;
     });
     new_admin.save((err, result) => {
       if (err) {

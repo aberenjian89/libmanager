@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import bcrypt from "bcrypt";
 
 let adminSchema = new mongoose.Schema({
   first_name: String,
@@ -8,16 +7,6 @@ let adminSchema = new mongoose.Schema({
   password: String,
   phone: String,
   auth_token: String
-});
-
-adminSchema.pre("save", function(next) {
-  bcrypt.hash(this.password, 10, (err, hash) => {
-    if (err) {
-      return next(err);
-    }
-    this.password = hash;
-    next();
-  });
 });
 
 let Admin = mongoose.model("Admin", adminSchema);
