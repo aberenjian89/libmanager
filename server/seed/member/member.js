@@ -12,7 +12,7 @@ var memberSchema = new Schema(
     State: String,
     phone: String,
     email: String,
-    agent_id: Number
+    agent_id: String
   },
   {
     timestamps: true
