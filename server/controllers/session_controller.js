@@ -15,7 +15,7 @@ export default class SessionController {
         });
       }
       bcrypt.compare(req.body.password, user.password, (err, result) => {
-        if (!err) {
+        if (!err && result) {
           const token = jwt.sign(
             { email: user.email, userId: current_user._id },
             process.env.Super_Secret,
@@ -75,11 +75,11 @@ export default class SessionController {
   static verifytoken(req, res, next) {
     try {
       jwt.verify(req.query.token, process.env.Super_Secret);
-      Admin.findOne({auth_token: req.query.token},(err,result)=>{
-        if (err){
-          return res.status(500)
+      Admin.findOne({ auth_token: req.query.token }, (err, result) => {
+        if (err) {
+          return res.status(500);
         }
-        if (result){
+        if (result) {
           return res.status(201).json({
             message: "Authenticated",
             current_user: {
@@ -88,11 +88,11 @@ export default class SessionController {
               last_name: result.last_name,
               email: result.email
             }
-          })
-        }else{
-          return res.status(500)
+          });
+        } else {
+          return res.status(500);
         }
-      })
+      });
     } catch (ex) {
       return res.status(401).json({
         message: "Not Authroized"
