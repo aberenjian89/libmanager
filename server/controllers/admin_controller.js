@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 
 export default class AdminController {
   constructor() {}
-  static create(req, res, next) {
+   create(req, res, next) {
     let new_admin = new Admin({
       first_name: req.body.first_name,
       last_name: req.body.last_name,
@@ -28,7 +28,7 @@ export default class AdminController {
     });
   }
 
-  static update(req, res, next) {
+   update(req, res, next) {
     let admin = new Admin({
       first_name: req.body.first_name,
       last_name: req.body.last_name,
@@ -48,7 +48,7 @@ export default class AdminController {
     next();
   }
 
-  static delete(req, res, next) {
+  delete(req, res, next) {
     next();
   }
 }

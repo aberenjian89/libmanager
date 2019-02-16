@@ -2,7 +2,7 @@ import Memebr from '../models/member_model'
 
 
 export default class MemberController {
-  static create(req,res,next){
+   create(req,res,next){
     let memeber = new Memebr({
       first_name: req.params.first_name,
       last_name: req.params.last_name,
@@ -23,4 +23,9 @@ export default class MemberController {
       }
     })
   }
+
+  getmember(req,res,next){
+
+  }
+
 }

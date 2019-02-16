@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
 
 export default class SessionController {
-  static create(req, res, next) {
+   create(req, res, next) {
     let current_user = null;
     Admin.findOne({ email: req.body.email }, (err, user) => {
       current_user = user;
@@ -51,7 +51,7 @@ export default class SessionController {
     });
   }
 
-  static destroy(req, res, next) {
+   destroy(req, res, next) {
     Admin.findOne({ _id: req.query.id }, (err, result) => {
       if (err) {
         res.status(500).json({
@@ -72,7 +72,7 @@ export default class SessionController {
     });
   }
 
-  static verifytoken(req, res, next) {
+   verifytoken(req, res, next) {
     try {
       jwt.verify(req.query.token, process.env.Super_Secret);
       Admin.findOne({ auth_token: req.query.token }, (err, result) => {
