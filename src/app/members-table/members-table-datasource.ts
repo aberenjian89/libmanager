@@ -1,37 +1,18 @@
-import { DataSource } from '@angular/cdk/collections';
-import { MatPaginator, MatSort } from '@angular/material';
-import { map } from 'rxjs/operators';
-import { Observable, of as observableOf, merge } from 'rxjs';
+import { DataSource } from "@angular/cdk/collections";
+import { MatPaginator, MatSort } from "@angular/material";
+import { map } from "rxjs/operators";
+import { Observable, of as observableOf, merge } from "rxjs";
+import { OnInit } from "@angular/core";
 
 // TODO: Replace this with your own data model type
 export interface MembersTableItem {
-  name: string;
-  id: number;
+  first_name: String;
+  last_name: String;
+  email: String;
 }
 
 // TODO: replace this with real data from your application
-const EXAMPLE_DATA: MembersTableItem[] = [
-  {id: 1, name: 'Hydrogen'},
-  {id: 2, name: 'Helium'},
-  {id: 3, name: 'Lithium'},
-  {id: 4, name: 'Beryllium'},
-  {id: 5, name: 'Boron'},
-  {id: 6, name: 'Carbon'},
-  {id: 7, name: 'Nitrogen'},
-  {id: 8, name: 'Oxygen'},
-  {id: 9, name: 'Fluorine'},
-  {id: 10, name: 'Neon'},
-  {id: 11, name: 'Sodium'},
-  {id: 12, name: 'Magnesium'},
-  {id: 13, name: 'Aluminum'},
-  {id: 14, name: 'Silicon'},
-  {id: 15, name: 'Phosphorus'},
-  {id: 16, name: 'Sulfur'},
-  {id: 17, name: 'Chlorine'},
-  {id: 18, name: 'Argon'},
-  {id: 19, name: 'Potassium'},
-  {id: 20, name: 'Calcium'},
-];
+// const EXAMPLE_DATA: MembersTableItem[] = [];
 
 /**
  * Data source for the MembersTable view. This class should
@@ -39,7 +20,13 @@ const EXAMPLE_DATA: MembersTableItem[] = [
  * (including sorting, pagination, and filtering).
  */
 export class MembersTableDataSource extends DataSource<MembersTableItem> {
-  data: MembersTableItem[] = EXAMPLE_DATA;
+  data: MembersTableItem[] = [
+    {
+      first_name: "Ali",
+      last_name: "Berenjian",
+      email: "Ali.rberenjian@gmail.com"
+    }
+  ];
 
   constructor(private paginator: MatPaginator, private sort: MatSort) {
     super();
@@ -62,9 +49,11 @@ export class MembersTableDataSource extends DataSource<MembersTableItem> {
     // Set the paginator's length
     this.paginator.length = this.data.length;
 
-    return merge(...dataMutations).pipe(map(() => {
-      return this.getPagedData(this.getSortedData([...this.data]));
-    }));
+    return merge(...dataMutations).pipe(
+      map(() => {
+        return this.getPagedData(this.getSortedData([...this.data]));
+      })
+    );
   }
 
   /**
@@ -87,16 +76,21 @@ export class MembersTableDataSource extends DataSource<MembersTableItem> {
    * this would be replaced by requesting the appropriate data from the server.
    */
   private getSortedData(data: MembersTableItem[]) {
-    if (!this.sort.active || this.sort.direction === '') {
+    if (!this.sort.active || this.sort.direction === "") {
       return data;
     }
 
     return data.sort((a, b) => {
-      const isAsc = this.sort.direction === 'asc';
+      const isAsc = this.sort.direction === "asc";
       switch (this.sort.active) {
-        case 'name': return compare(a.name, b.name, isAsc);
-        case 'id': return compare(+a.id, +b.id, isAsc);
-        default: return 0;
+        case "first_name":
+          return compare(a.first_name, b.first_name, isAsc);
+        case "last_name":
+          return compare(a.last_name, b.last_name, isAsc);
+        case "email":
+          return compare(a.email, b.email, isAsc);
+        default:
+          return 0;
       }
     });
   }

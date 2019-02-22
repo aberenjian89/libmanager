@@ -27,6 +27,8 @@ import { MembersTableComponent } from "./members-table/members-table.component";
 import { LoginComponent } from "./login/login.component";
 import { AuthGuardService } from "./services/auth-guard.service";
 import { AuthDeactiveService } from "./services/auth-decative.service";
+import { MembersService } from "./services/members.service";
+import { MembersTableDataSource } from "./members-table/members-table-datasource";
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { AuthDeactiveService } from "./services/auth-decative.service";
     NewMemberComponent,
     MembersComponent,
     MembersTableComponent,
-    LoginComponent
+    LoginComponent,
+    MembersTableDataSource
   ],
   imports: [
     BrowserModule,
@@ -57,7 +60,7 @@ import { AuthDeactiveService } from "./services/auth-decative.service";
     MatSortModule
   ],
   entryComponents: [NewMemberComponent],
-  providers: [AuthGuardService, AuthDeactiveService],
+  providers: [AuthGuardService, AuthDeactiveService, MembersService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
