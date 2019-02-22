@@ -23,5 +23,16 @@ export default class MemberController {
     });
   }
 
-  getmember(req, res, next) {}
+  getmember(req, res, next) {
+    Member.find({}, "first_name last_name email", (err, result) => {
+      if (err) {
+        return res.status(500).json({
+          message: err
+        });
+      }
+      return res.status(200).json({
+        result: result
+      });
+    });
+  }
 }
